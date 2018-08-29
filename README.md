@@ -1,2 +1,2 @@
 # BlogBackup
-blog.creepersan.com
+Simple backup for [blog.creepersan.com](blog.creepersan.com).
