@@ -133,3 +133,10 @@
 ## 尾巴
 
 发现在Android的高版本里，Google逐步收紧了开发者所能自由控制的权限。当然，这也是为了提高Android系统的安全性，减少恶意应用的一个做法，对整个Android系统的生态都是有积极作用的。~~只是苦了开发者~~，觉得有必要对Android1的大版本升级Api变动做一个总结了。。。
+
+## 参考资料
+
+[Android APP中卸载其他APP的三种方法 - yunterry](https://blog.csdn.net/ta_ab/article/details/77949348)
+
+[AndroidPie（9）使用Intent卸载应用无任何反应解决方法 - 阿闯学长](https://www.jianshu.com/p/cb60962b1fff)
+
