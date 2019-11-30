@@ -6,7 +6,7 @@
 
    首先是切换版本，执行命令`flutter version -f v1.10.14`，没想到终端输出如下
 
-   ![](01.png)
+   ![](img/01.png)
 
    不仅engine没下载下来，后续 flutter 命令也直接挂了，执行 flutter 指令直接报
 
@@ -41,68 +41,68 @@
 
    问题解决。
 
-   ![](03.png)
+   ![](img/03.png)
 
    ~~git 为什么不自动识别换行符呢...~~
 
 2. ### Failed to install the following Android SDK packages as some licenses have not been accepted
 
   点击编译运行，跑了没一会报错
-  
-  ![](02.png)
-  
+
+  ![](img/02.png)
+
   从出错信息来看，应该是对应 licenses 没有 accepted，
-  
+
   执行指令
-  
+
   ```
   flutter doctor --android-licenses
   ```
-  
+
   遇到需要输入的，输入 `y` 一路继续到底，同意所有 licenses，应该就没啥问题了。
-  
+
   然而重新编译运行，发现同样的错误又出来了
-  
+
   cd到sdkmanager下，执行
-  
+
   ```
   ./sdkmanager --licenses
   ```
-  
+
   重新编译，还是不行
-  
+
   执行
-  
+
   ```
   ./sdkmanager "platforms;android-28"
   ./sdkmanager "build-tools;28.0.3"
   ```
-  
+
   重新编译，还是不行
-  
+
   删除所有 licenses 然后重新执行上面的指令，还是不行...
-  
+
   重新安装AndroidSDK、Flutter，然后重复上面的操作
-  
+
   结果，还！是！不！行！
-  
+
   最后认真看了看报错信息，发现最后一行
-  
+
   ```
   Using Android SDK: /balabalabalabala
   ```
-  
+
   乾！这根本不是我的SDK路径！
-  
+
   检查项目配置，发现AndroidSDK路径没配置...
-  
+
   重新配置AndroidSDK路径，问题解决...
-  
+
 3. ### ***.dart were declared as an inputs, but did not exist check the definition of target:kernel_snapshot for errors
 
    报错如下
 
-   ![](04.png)
+   ![](img/04.png)
 
    把工程目录里面的 `.dart_tool` 删除即可
 
