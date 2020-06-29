@@ -1,0 +1,19 @@
+# 【从零开始的iOS应用开发之旅 - 04】UINavigationController管理页面的跳转
+
+### 前情提要
+
+之前我们了解到，UITabBarController是一个能提供一个页面下，多个UIViewController同屏切换的一个ViewController。这种类似的操作逻辑在众多App中大量出现。但是还存在另外一种大量应用情景，UITabBarController无法实现...
+
+### 情景
+
+还有一种大量使用的情景，那就时多个ViewController进行跳转。类似的有比如微信订阅号点击推送的文章跳转到文章详情、系统设计点击选择蓝牙跳转到搜索蓝牙设备列表。类似这样子的需要页面跳转到情景，UITabBarController便无能为力了。
+
+要实现如此的页面跳转逻辑，我们可以使用这个VC - `UINavigationController`
+
+### UINavigationController
+
+UINavigationController于UITabBarController有一个很大的不同，那就是它不像UITabBarController那样有一个UITabBar用于展示自身的界面（底部按钮这些）。UINavigationController默认是没有界面展示，显示到屏幕上就时一个全黑的界面。我们可以使用`initWithRootController` 来为其指定一个展示的ViewController。
+
+UINavigationController的内维持了一个ViewController的栈，我们可以使用 `pushViewController` 函数往栈中压入一个新的ViewController。而在栈最上面的ViewController就会得以展示。给我门视觉上感受到的就是打开了一个新的界面。
+
+一个通俗类比Android（虽然不恰当），UITabBarController就像是ViewPager，而想要startActivity就必须借助UINavigationController的navigationController进行界面的跳转。
