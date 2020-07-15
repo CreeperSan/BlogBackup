@@ -214,7 +214,7 @@ BIMoreViewController *moreViewController = [[BIMoreViewController alloc] initWit
 
 ![](img/09.jpg)
 
-### 接收点击事件
+### 处理点击事件
 
 就像其他的大部分的列表项一样，它不仅仅能展示相应的数据，也能接收相应点击事件的处理。
 
@@ -252,5 +252,90 @@ self.tableView.delegate = self;
 
 ### 填充实际的数据
 
-上面的代码均为简单的测试数据，下面我们可以填充实际展示的数据了
+上面的代码均为简单的测试数据，下面我们可以填充实际展示的数据了，我们可以把所需要显示的数据放置于一个数组中，然后按照需要取值展示。当然实现方法非常多，下面代码可以给大家一个参考
 
+`完整的BIMoreViewController.m`
+
+```objc
+#import "BIMoreViewController.h"
+#import "SettingViewController.h"
+
+static NSString * const CELL_SETTING = @"设置";
+static NSString * const CELL_WEBSITE = @"访问网页版";
+static NSString * const CELL_FEEDBACK = @"反馈";
+static NSString * const CELL_HELP = @"帮助";
+static NSString * const CELL_ABOUT = @"关于";
+
+@interface BIMoreViewController () <UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) NSMutableArray <NSArray *> *tableList;
+
+@end
+
+@implementation BIMoreViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self initDataList];
+    
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    
+    UIImageView *headerView = [[UIImageView alloc] init];
+    headerView.image = [UIImage imageNamed:@"ic_bing_nav_gray"];
+    headerView.frame = CGRectMake(0, 0, self.view.bounds.size.width, 100);
+    headerView.backgroundColor = [UIColor greenColor];
+    self.tableView.tableHeaderView = headerView;
+    
+    UILabel *footerView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 36)];
+    footerView.text = @"v 0.0.1";
+    footerView.textAlignment = NSTextAlignmentCenter;
+    self.tableView.tableFooterView = footerView;
+}
+
+- (void) initDataList {
+    _tableList = [NSMutableArray arrayWithObject:@[CELL_SETTING]];
+    [_tableList addObject:@[CELL_WEBSITE, CELL_FEEDBACK]];
+    [_tableList addObject:@[CELL_HELP, CELL_ABOUT]];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return _tableList[section].count;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return _tableList.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"id"];
+    cell.textLabel.text = _tableList[indexPath.section][indexPath.row];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *name = _tableList[indexPath.section][indexPath.row];
+    if ([name isEqualToString:CELL_SETTING]) { // 设置
+        [self.navigationController pushViewController:[[SettingViewController alloc] init] animated:YES];
+    } else if ([name isEqualToString:CELL_WEBSITE]) { // 访问网页版
+           
+    } else if ([name isEqualToString:CELL_FEEDBACK]) { // 反馈
+          
+    } else if ([name isEqualToString:CELL_HELP]) { // 帮助
+             
+    } else if ([name isEqualToString:CELL_ABOUT]) { // 关于
+                
+    }
+    
+}
+
+@end
+
+```
+
+所展示的数据存储在 tableList 中，展示时从 tableList 中取数据即可进行展示
+
+编译运行可以得到得到这样的列表
+
+![](img/38.jpg)
